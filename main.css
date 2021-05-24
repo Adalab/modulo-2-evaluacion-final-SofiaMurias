@@ -29,16 +29,24 @@
 }
 .text {
   border: 2px solid rgb(154, 53, 194);
-  border-radius: 5px;
+  border-radius: 10px;
   width: 300px;
   height: 30px;
   margin-right: 20px;
 }
+.tittle{
+ font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 
 .btn {
   padding: auto;
   width: 75px;
   height: 30px;
+  background-color: rgb(154, 53, 194);
+  color: white;
+  border-radius: 10px;
 }
 .series {
   display: flex;
@@ -46,14 +54,15 @@
 }
 
 .series-list-1 {
-  height: 100vh;
+  height: 100;
   width: 25%;
   background-color: rgb(217, 197, 236);
 }
 .series-list-2 {
+  display: flex;
   order: 1;
   background-color: rgb(183, 238, 240);
-  height: 100vh;
+  height: 100;
   width: 75%;
 }
 
@@ -63,8 +72,28 @@
   justify-content: center;
   align-items: center;
   border: solid 2px rgb(154, 53, 194);
+  border-radius: 20px;
+  margin: 20px 10px;
+  width: 25vw;
+
+}
+
+.list-title {
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.list-img{
+ margin-bottom: 10px;
+ width: 80%;
+}
+
+.list-btn{
+  width: 10px;
+  height: 10px;
 }
 
 .list-favorites {
-  background-color: coral;
-}
+  background-color: rgb(215, 186, 241);
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color:rgb(231, 222, 240)
