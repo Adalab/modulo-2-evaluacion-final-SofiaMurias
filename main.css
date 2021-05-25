@@ -16,9 +16,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
+  background-color: rgb(183, 238, 240);
   width: 100vw;
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .seeker {
@@ -34,11 +34,11 @@
   height: 30px;
   margin-right: 20px;
 }
-.tittle{
- font-size: 30px;
+.tittle {
+  font-size: 30px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(154, 53, 194);
 }
-
 
 .btn {
   padding: auto;
@@ -47,10 +47,14 @@
   background-color: rgb(154, 53, 194);
   color: white;
   border-radius: 10px;
+  margin-right: 10px;
 }
+
 .series {
   display: flex;
   flex-direction: row;
+  width: 100vw;
+  height: 100vh;
 }
 
 .series-list-1 {
@@ -59,11 +63,10 @@
   background-color: rgb(217, 197, 236);
 }
 .series-list-2 {
-  display: flex;
   order: 1;
   background-color: rgb(183, 238, 240);
   height: 100;
-  width: 75%;
+  width: 100%;
 }
 
 .list {
@@ -74,26 +77,65 @@
   border: solid 2px rgb(154, 53, 194);
   border-radius: 20px;
   margin: 20px 10px;
-  width: 25vw;
+  width: 150px;
+  height: 250px;
+}
+.list-fav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px black;
+  border-radius: 20px;
+  margin: 20px 10px;
+  width: 120px;
+  height: 210px;
+  background-color: blanchedalmond;
+}
 
+.title-result {
+  color: blueviolet;
+  width: 100%;
 }
 
 .list-title {
   margin: 10px 0px;
   text-align: center;
 }
-
-.list-img{
- margin-bottom: 10px;
- width: 80%;
+.list-title-fav {
+  color: blueviolet;
+  margin: 10px 0px;
+  text-align: center;
 }
 
-.list-btn{
+.list-img {
+  margin-bottom: 10px;
+  width: 80%;
+}
+.list-img-fav {
+  margin-bottom: 10px;
+  width: 70%;
+}
+
+.list-btn {
   width: 10px;
   height: 10px;
+}
+.list-btn-fav {
+  background-color: blueviolet;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 20px;
 }
 
 .list-favorites {
   background-color: rgb(215, 186, 241);
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  color:rgb(231, 222, 240)
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(231, 222, 240);
+}
+.list-preview {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(183, 238, 240);
+}

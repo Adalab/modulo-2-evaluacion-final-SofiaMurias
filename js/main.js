@@ -2,13 +2,20 @@
 let inputElement = document.querySelector(".js-input");
 const btnElement = document.querySelector(".js-btn");
 const resultUserShows = document.querySelector(".js-list-preview");
+const listShowsFavorites = document.querySelector(".list-favorites");
+const removeBtn = document.querySelector(".js-list-preview-btn");
+const btnResetAll = document.querySelector(".js-btn-reset");
+
+let arr = [];
+let favorites = [];
 
 function getInfoApi() {
   let inputValue = inputElement.value;
   fetch(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
     .then((response) => response.json())
     .then((data) => {
-      paintShowFromApi(data);
+      arr = data;
+      paintShowFromApi(arr);
       console.log(data);
     });
 }
@@ -19,9 +26,18 @@ btnElement.addEventListener("click", getInfoApi);
 
 function paintShowFromApi(data) {
   let htmlCode = "";
-  htmlCode += `<h2 class "title-result" > Estos son los resultados de tu búsqueda: </h2>`;
+  htmlCode += `<h2 class ="title-result" > Estos son los resultados de tu búsqueda: </h2>`;
   for (let i = 0; i < data.length; i++) {
-    htmlCode += `<li  class="js-list-preview-item list" data-id="${data[i].show.id}">`;
+    const isPresent = favorites.find(
+      (favoriteId) => favoriteId.show.id === data[i].show.id
+    );
+
+    if (isPresent === undefined) {
+      htmlCode += `<li  class="js-list-preview-item list" data-id="${data[i].show.id}">`;
+    } else {
+      htmlCode += `<li  class="js-list-preview-item list list-favorites" data-id="${data[i].show.id}">`;
+    }
+
     htmlCode += `<h3 class="js-list-preview-title list-title">${data[i].show.name}</h3>`;
     if (data[i].show.image === null) {
       htmlCode += `<img class="js-list-preview-img list-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV">`;
@@ -38,21 +54,18 @@ function paintShowFromApi(data) {
 
 // las series en las que haya hecho click pintar las  listas en la seccion de favoritos
 
-const listShowsFavorites = document.querySelector(".list-favorites");
-let listFavorites = [];
-
-function paintShowsFavorites(listFavorites) {
+function paintShowsFavorites(favorites) {
   let htmlCode = "";
   htmlCode += `<h3 class "title-result"> Estas son tus series favoritas: </h3>`;
-  for (let i = 0; i < listFavorites.length; i++) {
-    htmlCode += `<li  class="js-list-preview-item list" data-id="${listFavorites[i].show.id}">`;
-    htmlCode += `<h4 class="js-list-preview-title list-title">${listFavorites[i].show.name}</h4>`;
-    if (listFavorites[i].show.image === null) {
-      htmlCode += `<img class="js-list-preview-img list-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV">`;
+  for (let i = 0; i < favorites.length; i++) {
+    htmlCode += `<li  class="js-list-preview-item list-fav" data-id="${favorites[i].show.id}">`;
+    htmlCode += `<h4 class="js-list-preview-title list-title-fav">${favorites[i].show.name}</h4>`;
+    if (favorites[i].show.image === null) {
+      htmlCode += `<img class="js-list-preview-img list-img-fav" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV">`;
     } else {
-      htmlCode += `<img class="js-list-preview-img list-img" src="${listFavorites[i].show.image.medium}">`;
+      htmlCode += `<img class="js-list-preview-img list-img-fav" src="${favorites[i].show.image.medium}">`;
     }
-    htmlCode += `<button class="js-list-preview-btn list-btn"  type="reset"> X </button>`;
+    htmlCode += `<button class="js-list-preview-btn list-btn-fav"  type="reset"> X </button>`;
 
     htmlCode += `</li>`;
   }
@@ -63,24 +76,30 @@ function paintShowsFavorites(listFavorites) {
 //CAMBIAR FONDO y fuente A LAS LISTAS AL HACER CLICK
 
 function changeClassFavorites(event) {
-  event.currentTarget.classList.toggle("list-favorites");
+  //event.currentTarget.classList.toggle("list-favorites");
   console.log(event.currentTarget);
 
   const idShows = event.currentTarget.dataset.id;
-  console.log(idShows);
 
-  const isPresent = listFavorites.find((favoriteId) => favoriteId === idShows);
+  const isPresent = favorites.find(
+    (favoriteId) => favoriteId.show.id === parseInt(idShows)
+  );
 
-  /*if (isPresent === undefined) {
-    //no está la paleta donde la usuaria ha hecho click no está dentro del array
-    listFavorites.push(idShows);
-  } 
-  
-  else {
-    listFavorites.filter((favoritesId) => favoritesId !== idShows);
+  if (isPresent === undefined) {
+    const seletectElement = arr.find(
+      (showId) => showId.show.id === parseInt(idShows)
+    );
+
+    favorites.push(seletectElement);
+  } else {
+    favorites = favorites.filter(
+      (favoritesId) => favoritesId.show.id !== parseInt(idShows)
+    );
   }
- */
-  paintShowsFavorites(listFavorites);
+
+  paintShowFromApi(arr);
+  paintShowsFavorites(favorites);
+  saveInLocalStorage();
 }
 
 function listenClickLi() {
@@ -89,3 +108,29 @@ function listenClickLi() {
     listLi.addEventListener("click", changeClassFavorites);
   }
 }
+
+function saveInLocalStorage() {
+  localStorage.setItem("showFavorites", JSON.stringify(favorites));
+}
+
+function getFavoritesStorage() {
+  favorites = JSON.parse(localStorage.getItem("showFavorites"));
+
+  console.log(getFavoritesStorage);
+
+  paintShowsFavorites(favorites);
+}
+getFavoritesStorage();
+
+//borrar un favorito dando a la X
+
+function handlerRemoveBtn() {
+  // localStorage.removeItem("showFavorites");
+}
+removeBtn.addEventListener(`click`, handlerRemoveBtn);
+
+//boton de reset y limpia todo
+
+function handlerResetAllBtn() {}
+
+btnResetAll.addEventListener(`click`, handlerResetAllBtn);
