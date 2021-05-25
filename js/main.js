@@ -11,7 +11,7 @@ let favorites = [];
 
 function getInfoApi() {
   let inputValue = inputElement.value;
-  fetch(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
+  fetch(`//api.tvmaze.com/search/shows?q=${inputValue}`)
     .then((response) => response.json())
     .then((data) => {
       arr = data;
