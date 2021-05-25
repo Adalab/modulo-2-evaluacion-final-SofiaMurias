@@ -76,9 +76,6 @@ function paintShowsFavorites(favorites) {
 //CAMBIAR FONDO y fuente A LAS LISTAS AL HACER CLICK
 
 function changeClassFavorites(event) {
-  //event.currentTarget.classList.toggle("list-favorites");
-  console.log(event.currentTarget);
-
   const idShows = event.currentTarget.dataset.id;
 
   const isPresent = favorites.find(
@@ -114,23 +111,22 @@ function saveInLocalStorage() {
 }
 
 function getFavoritesStorage() {
-  favorites = JSON.parse(localStorage.getItem("showFavorites"));
+  if (localStorage.getItem("showFavorites") !== null) {
+    favorites = JSON.parse(localStorage.getItem("showFavorites"));
 
-  console.log(getFavoritesStorage);
+    console.log(getFavoritesStorage);
 
-  paintShowsFavorites(favorites);
+    paintShowsFavorites(favorites);
+  }
 }
 getFavoritesStorage();
 
-//borrar un favorito dando a la X
-
-function handlerRemoveBtn() {
-  // localStorage.removeItem("showFavorites");
-}
-removeBtn.addEventListener(`click`, handlerRemoveBtn);
-
 //boton de reset y limpia todo
 
-function handlerResetAllBtn() {}
+function handlerResetAllBtn() {
+  localStorage.removeItem("showFavorites");
+  favorites = [];
+  paintShowsFavorites(favorites);
+}
 
 btnResetAll.addEventListener(`click`, handlerResetAllBtn);
