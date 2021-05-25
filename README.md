@@ -5,12 +5,14 @@ El ejercicio consiste en crear un buscador de series, para ello hay que enlazar 
 Además se incorpora funcionalidades como poder seleccionar tus series favoritas que se guardan en un apartado diferente y se cambian de color y de fuente para que sepas que ya la has seleccionado.
 Si quieres puedes borrar las favoritas una a una con el boton de eliminar de cada tarjeta, o todas a la vez con el botón de "Borrar favoritos" .
 
-###**Tecnología usada**
+**###Tecnología usada**
 Para poder crear este proyecto he usado:
 
 1.HTML
+
 2.SASS
+
 3.JS
 
-###**En proceso:**
+**###En proceso:**
 La página no está adaptada aún a todos los dispositivos
